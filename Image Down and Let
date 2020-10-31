@@ -1,0 +1,26 @@
+ func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        
+        let headerView = Bundle.main.loadNibNamed("ViewEx", owner: self, options: [:])?.first as! ViewEx
+        
+        headerView.txtname.text = "\(arrname[section])"
+        
+        // Image Down and left
+        if arrContaianObjc.contains(section){
+            headerView.imgArow.isHidden = true
+            headerView.imgDown.isHidden = false
+        }
+        else{
+            headerView.imgArow.isHidden = false
+            headerView.imgDown.isHidden = true
+        }
+        
+        let button = UIButton(type: .custom)
+        button.frame = headerView.bounds
+        button.tag = section // Assign section tag to this button
+        button.addTarget(self, action: #selector(tapSection(sender:)), for: .touchUpInside)
+        headerView.addSubview(button)
+        
+        return headerView
+        
+    }
